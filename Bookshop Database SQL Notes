@@ -1,6 +1,26 @@
 This will group the sum of the number of books ordered for each given title, then give it the alias TotalSales. It will then order it by popularity from largest to smallest.
+
 SELECT BookTitle, SUM(NumberOrdered) As TotalSales
 FROM books, orderline
 WHERE books.ISBN = orderline.ISBN
 GROUP BY BookTitle
 ORDER BY TotalSales DESC;
+
+This returns the list of tables in the bookshop database.
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            MySqlConnection con = new MySqlConnection($"server=192.168.35.248;uid=18GWilkinson;pwd={txtPWD.Text};database=18GWilkinson _Bookshop");
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = con;
+            String SQL = "SHOW TABLES";
+            cmd.CommandText = SQL;
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            string output = "";
+            while (reader.Read())
+            {
+                output += reader[0] + "\n";
+            }
+            con.Close();
+            MessageBox.Show(output);
+        }
